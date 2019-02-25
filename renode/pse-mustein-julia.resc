@@ -1,0 +1,53 @@
+:name: PolarFire SoC
+:description: This is a sample script prepared to create a PolarFire SoC platform
+
+logLevel 3
+
+using sysbus
+mach create
+
+machine LoadPlatformDescription @platforms/cpus/polarfire.repl
+
+machine LoadPlatformDescriptionFromString 
+"""
+button0: Miscellaneous.Button @ gpio0
+    -> gpio0@0
+
+button1: Miscellaneous.Button @ gpio0
+    -> gpio0@1
+
+button2: Miscellaneous.Button @ gpio0
+    -> gpio0@2
+"""
+
+
+include $CWD/../../extras/workspace.examples/pse-mustein-julia/renode/MusteinGenericGPU.cs
+
+
+machine LoadPlatformDescriptionFromString "mustein: Video.MusteinGenericGPU @ sysbus 0x10100000 { registers64bitAligned: true }"
+showAnalyzer sysbus.mustein
+logLevel -1 sysbus.mustein
+
+
+logLevel 3 sysbus.e51
+logLevel 3 sysbus.u54_1
+logLevel 3 sysbus.u54_2
+logLevel 3 sysbus.u54_3
+logLevel 3 sysbus.u54_4
+
+showAnalyzer mmuart0
+
+e51 StartGdbServer 3333
+u54_1 StartGdbServer 3334
+u54_2 StartGdbServer 3335
+u54_3 StartGdbServer 3336
+u54_4 StartGdbServer 3337
+
+
+# Disabling the harts 2-4 as for this demo are not needed, and they would consume resources on the host 
+sysbus.u54_2 IsHalted true
+sysbus.u54_3 IsHalted true
+sysbus.u54_4 IsHalted true
+
+
+log "Renode has been started successfully and is ready for a gdb connection. (This is not an error)" 3
