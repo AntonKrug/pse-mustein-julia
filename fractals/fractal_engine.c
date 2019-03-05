@@ -39,36 +39,22 @@ const uint32_t colors[64] = {
 uint32_t FORCE_INLINE FORCE_O3 renderFractalPixel(
 		float    x,        float    y,
 		float    seedReal, float    seedComplex,
-		float    gamma,    uint32_t maxIter) {
+		float    gamma,    uint64_t maxIter) {
 
-    const bool isJulia = true; // Can switch between Julia and Mandelbrot
 
-    float u  = 0.0f;
-    float v  = 0.0f;
-    if (isJulia) {
-  	  u = x;
-  	  v = y;
-    }
+    float u  = x;
+    float v  = y;
     float u2 = u * u;
     float v2 = v * v;
-    int iter;        // iterations executed
+    uint64_t iter;        // iterations executed
 
-    if (isJulia) {
-      for (iter = 0 ; iter < maxIter && ( u2+v2 < 4.0f); iter++) {
-		v  = 2 * (u * v) + seedComplex;
-		u  = u2 - v2     + seedReal;
+    for (iter = 0 ; iter < maxIter && ( u2+v2 < 4.0f); iter++) {
+    	v  = (u * v);
+    	v  = v + v    + seedComplex;
+		u  = u2 - v2  + seedReal;
 		u2 = u * u;
 		v2 = v * v;
-	  }
-    }
-    else {
-      for (iter = 0 ; iter < maxIter && ( u2+v2 < 4.0f); iter++) {
-		v  = 2 * (u * v) + y;
-		u  = u2 - v2     + x;
-		u2 = u * u;
-		v2 = v * v;
-	  }
-    }
+	}
 
     if (iter >= maxIter) {
   	  return 0x0;
