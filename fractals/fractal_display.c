@@ -87,7 +87,7 @@ void fractalLoop(uint64_t base, uint32_t *buffer) {
       currentSpeed = ANIMATION_SPEED * 3.0f * (1.0f / current.gamma);
     }
 
-    video_write_pixel_buffer(base, buffer, WIDTH * HEIGHT);
+    video_write_pixel_buffer_fully_packed(base, (uint64_t *)buffer, WIDTH * HEIGHT /2);
   }
   i = iNext;
 }
@@ -97,7 +97,7 @@ void juliaMain(uint64_t base) {
   bool isJulia = true;
   uint32_t buffer[WIDTH * HEIGHT];
 
-  video_setup(base, 23, WIDTH, HEIGHT, COLOR_HIGH, PACKING_SINGLE_PIXEL_PER_WRITE);
+  video_setup(base, 23, WIDTH, HEIGHT, COLOR_TRUE, PACKING_FULLY_64bit);
 
   // Render following fractal series
   while (1) {
