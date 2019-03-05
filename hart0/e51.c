@@ -130,6 +130,8 @@ void e51(void) {
 	raise_soft_interrupt(1);
 	raise_soft_interrupt(2);
 
+	//asm("wfi");
+
 
 	while (1) {
 		// Stay in the infinite loop, never return from main
