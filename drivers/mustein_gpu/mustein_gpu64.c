@@ -18,11 +18,20 @@ void video_write_pixel_rgb(uint64_t base, uint64_t offset, uint8_t red, uint8_t 
 }
 
 
-void MUSEIN_INLINE video_write_pixel_raw(uint64_t base, uint64_t offset, uint32_t bytecode) {
+void MUSTEIN_INLINE video_write_pixel_raw(uint64_t base, uint64_t offset, uint32_t bytecode) {
 	*((uint64_t*)base + offset)  = bytecode;
 }
 
-void video_write_pixel_buffer(uint64_t base, uint32_t *buffer, uint64_t count) {
+void MUSTEIN_OPTIMISE video_write_pixel_buffer_fully_packed(uint64_t base, uint64_t *buffer, uint64_t count) {
+  uint64_t* pointer = (uint64_t*)base;
+
+  for (uint64_t index = 0; index < count; ++index) {
+    *(pointer) = buffer[index];
+    pointer++;
+  }
+}
+
+void MUSTEIN_OPTIMISE video_write_pixel_buffer(uint64_t base, uint32_t *buffer, uint64_t count) {
   uint64_t* pointer = (uint64_t*)base;
 
   for (uint64_t index = 0; index < count; ++index) {
@@ -35,6 +44,6 @@ void video_setup(uint64_t base, uint8_t controlBit, uint32_t width, uint32_t hei
 	videoController *controller = (videoController*) (base | (1 << controlBit));
 	controller->width  = width;
 	controller->height = height;
-	//controller->parameters = colors | packing << 4;
+	controller->parameters = colors | packing << 4;
 }
 
