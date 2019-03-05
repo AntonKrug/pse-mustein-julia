@@ -41,7 +41,7 @@
                             							
                             <option id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.addtools.printsize.1469004354" name="Print size" superClass="ilg.gnumcueclipse.managedbuild.cross.riscv.option.addtools.printsize" useByScannerDiscovery="false" value="true" valueType="boolean"/>
                             							
-                            <option id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.optimization.level.21962103" name="Optimization Level" superClass="ilg.gnumcueclipse.managedbuild.cross.riscv.option.optimization.level" useByScannerDiscovery="true" value="ilg.gnumcueclipse.managedbuild.cross.riscv.option.optimization.level.most" valueType="enumerated"/>
+                            <option id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.optimization.level.21962103" name="Optimization Level" superClass="ilg.gnumcueclipse.managedbuild.cross.riscv.option.optimization.level" useByScannerDiscovery="true" value="ilg.gnumcueclipse.managedbuild.cross.riscv.option.optimization.level.none" valueType="enumerated"/>
                             							
                             <option id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.optimization.messagelength.1911902368" name="Message length (-fmessage-length=0)" superClass="ilg.gnumcueclipse.managedbuild.cross.riscv.option.optimization.messagelength" useByScannerDiscovery="true" value="true" valueType="boolean"/>
                             							
@@ -269,7 +269,7 @@
             			
             <storageModule moduleId="cdtBuildSystem" version="4.0.0">
                 				
-                <configuration artifactName="${ProjName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe,org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release" cleanCommand="${cross_rm} -rf" description="" errorParsers="org.eclipse.cdt.core.GASErrorParser;org.eclipse.cdt.core.GmakeErrorParser;org.eclipse.cdt.core.GLDErrorParser;org.eclipse.cdt.core.CWDLocator;org.eclipse.cdt.core.GCCErrorParser" id="ilg.gnumcueclipse.managedbuild.cross.riscv.config.elf.release.1622688262" name="Release" parent="ilg.gnumcueclipse.managedbuild.cross.riscv.config.elf.release">
+                <configuration artifactName="${ProjName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe,org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release" cleanCommand="${cross_rm} -rf" description="" errorParsers="org.eclipse.cdt.core.GASErrorParser;org.eclipse.cdt.core.GmakeErrorParser;org.eclipse.cdt.core.GLDErrorParser;org.eclipse.cdt.core.CWDLocator;org.eclipse.cdt.core.GCCErrorParser" id="ilg.gnumcueclipse.managedbuild.cross.riscv.config.elf.release.1622688262" name="Release" parent="ilg.gnumcueclipse.managedbuild.cross.riscv.config.elf.release" postbuildStep="${cross_prefix}nm${cross_sufix} --print-size --size-sort ${BuildArtifactFileName}">
                     					
                     <folderInfo id="ilg.gnumcueclipse.managedbuild.cross.riscv.config.elf.release.1622688262." name="/" resourcePath="">
                         						
@@ -341,7 +341,7 @@
                             							
                             <targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="ilg.gnumcueclipse.managedbuild.cross.riscv.targetPlatform.1801563061" isAbstract="false" osList="all" superClass="ilg.gnumcueclipse.managedbuild.cross.riscv.targetPlatform"/>
                             							
-                            <builder buildPath="${workspace_loc:/PSE_RV64_gpio_example}/Release" id="ilg.gnumcueclipse.managedbuild.cross.riscv.builder.793974522" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Gnu Make Builder" superClass="ilg.gnumcueclipse.managedbuild.cross.riscv.builder"/>
+                            <builder buildPath="${workspace_loc:/PSE_RV64_gpio_example}/Release" enableCleanBuild="true" id="ilg.gnumcueclipse.managedbuild.cross.riscv.builder.793974522" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Gnu Make Builder" superClass="ilg.gnumcueclipse.managedbuild.cross.riscv.builder"/>
                             							
                             <tool id="ilg.gnumcueclipse.managedbuild.cross.riscv.tool.assembler.798291187" name="GNU RISC-V Cross Assembler" superClass="ilg.gnumcueclipse.managedbuild.cross.riscv.tool.assembler">
                                 								
@@ -445,7 +445,7 @@
                                 							
                             </tool>
                             							
-                            <tool id="ilg.gnumcueclipse.managedbuild.cross.riscv.tool.printsize.1762814643" name="GNU RISC-V Cross Print Size" superClass="ilg.gnumcueclipse.managedbuild.cross.riscv.tool.printsize">
+                            <tool command="${cross_prefix}${cross_size}${cross_suffix}" id="ilg.gnumcueclipse.managedbuild.cross.riscv.tool.printsize.1762814643" name="GNU RISC-V Cross Print Size" superClass="ilg.gnumcueclipse.managedbuild.cross.riscv.tool.printsize">
                                 								
                                 <option id="ilg.gnumcueclipse.managedbuild.cross.riscv.option.printsize.format.1474998753" name="Size format" superClass="ilg.gnumcueclipse.managedbuild.cross.riscv.option.printsize.format" useByScannerDiscovery="false"/>
                                 							
