@@ -254,9 +254,9 @@ namespace Antmicro.Renode.Peripherals.Video {
     }
 
     public enum ColorMode : uint {
-      LowColor  = 1,  // 8-bit  per pixel, 3-bits Red, 3-bits Green and 2-bits Blue
-      HighColor = 2,  // 16-bit per pixel, 5-bits Red, 6-bits Green and 5-bits Blue
-      TrueColor = 3   // 32-bit per pixel, 8-bits Red, 8-bits Green and 8-bits Blue
+      LowColor  = 0,  // 8-bit  per pixel, 3-bits Red, 3-bits Green and 2-bits Blue
+      HighColor = 1,  // 16-bit per pixel, 5-bits Red, 6-bits Green and 5-bits Blue
+      TrueColor = 2   // 32-bit per pixel, 8-bits Red, 8-bits Green and 8-bits Blue
     }
 
     [DllImport("libc", EntryPoint = "memset")]
