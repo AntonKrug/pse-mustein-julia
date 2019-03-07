@@ -13,7 +13,8 @@
 
 #ifdef MUSTEIN_CPU_32
 #include "mustein_gpu32.h"
-#else MUSTEIN_CPU_64
+#else
+// if it's not MUSTEIN_CPU_32, then assume MUSTEIN_CPU_64
 #include "mustein_gpu64.h"
 #endif
 
