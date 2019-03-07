@@ -332,5 +332,4 @@ namespace Antmicro.Renode.Peripherals.Video {
 
     }
 
-
 }
