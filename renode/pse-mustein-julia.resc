@@ -21,10 +21,10 @@ button2: Miscellaneous.Button @ gpio0
 """
 
 
-include $CWD/../../extras/workspace.examples/pse-mustein-julia/renode/MusteinGenericGPU.cs
+include $CWD/../../extras/workspace.examples/pse-mustein-julia/renode/models/MusteinGenericGPU.cs
 
 
-machine LoadPlatformDescriptionFromString "mustein: Video.MusteinGenericGPU @ sysbus 0x10100000 { registers64bitAligned: true }"
+machine LoadPlatformDescriptionFromString "mustein: Video.MusteinGenericGPU @ sysbus 0x10100000 { frameBufferSize: 0x100000; registers64bitAligned: true }"
 showAnalyzer sysbus.mustein
 logLevel -1 sysbus.mustein
 
@@ -35,7 +35,7 @@ logLevel 3 sysbus.u54_2
 logLevel 3 sysbus.u54_3
 logLevel 3 sysbus.u54_4
 
-showAnalyzer mmuart0
+#showAnalyzer mmuart0
 
 e51 StartGdbServer 3333
 u54_1 StartGdbServer 3334
