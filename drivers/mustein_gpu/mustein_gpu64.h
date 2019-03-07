@@ -1,55 +1,76 @@
 /*
- * mustein_gpu64.h
+ * Header for 64-bit CPU
  *
- *  Created on: 13 Nov 2018
- *      Author: akrug
+ * Date:   6 Mar 2019
+ * Author: anton.krug@microchip.com
  */
-
 
 #ifndef SRC_MUSTEIN_GPU64_H_
 #define SRC_MUSTEIN_GPU64_H_
 
-#include <stdint.h>
+#include "mustein_gpu_common.h"
 
-// Comment the following line to debug the driver
-#define OPTIMISE_DEBUG_CONFIGURATION
+#ifdef MUSTEIN_CPU_64
 
-#ifdef OPTIMISE_DEBUG_CONFIGURATION
-#define MUSTEIN_INLINE __attribute__((always_inline)) inline
-#define MUSTEIN_OPTIMISE __attribute__((optimize("O3")))
-#else
-#define MUSTEIN_INLINE
-#define MUSTEIN_OPTIMISE
+
+void mustein_video_setup(uint64_t base, uint8_t controlBit, uint32_t width,
+        uint32_t height, MusteinColors colors, MusteinPixelPacking packing);
+
+
+// ------ 8-bit color mode ------
+void mustein_write_low_color_raw8(uint64_t base, uint64_t offset,
+        uint8_t value);
+
+
+void mustein_write_low_color_rgb(uint64_t base, uint64_t offset,
+        uint8_t red, uint8_t green, uint8_t blue);
+
+
+// ------ 16-bit color mode ------
+void mustein_write_high_color_raw16(uint64_t base, uint64_t offset,
+        uint16_t value);
+
+
+void mustein_write_high_color_rgb(uint64_t base, uint64_t offset,
+        uint8_t red, uint8_t green, uint8_t blue);
+
+
+// ------ 32-bit color mode ------
+void mustein_write_true_color_raw24(uint64_t base, uint64_t offset,
+        uint32_t value);
+
+
+void mustein_write_true_color_rgb(uint64_t base, uint64_t offset, uint8_t red,
+        uint8_t green, uint8_t blue);
+
+
+// Write single 32-bit pixel, or packed pair of 16-bit pixels
+void mustein_write_raw32(uint64_t base, uint64_t offset, uint32_t bytecode);
+
+
+// Single fully packed write (can work with any color mode)
+void mustein_write_raw64(uint64_t base, uint64_t offset, uint64_t bytecode);
+
+
+// ------ Bulk buffer copy ------
+
+// 8-bit color bulk copy (unpacked mode => 1 byte copied, 7 bytes skipped)
+void mustein_write_buffer8(uint64_t base, uint8_t *buffer, uint64_t count);
+
+
+// 16-bit color bulk copy (unpacked mode => 2 bytes copied, 6 bytes skipped)
+void mustein_write_buffer16(uint64_t base, uint16_t *buffer, uint64_t count);
+
+
+// 32-bit color bulk copy (unpacked mode => 4 bytes copied, 4 bytes skipped)
+void mustein_write_buffer32(uint64_t base, uint32_t *buffer, uint64_t count);
+
+
+// fully packed bulk copy
+void mustein_write_buffer64_fullypacked(uint64_t base, uint64_t *buffer,
+        uint64_t count);
+
+
 #endif
-
-
-typedef struct {
-  uint64_t width;
-  uint64_t height;
-  uint64_t parameters;
-} videoController;
-
-
-typedef enum {
-	COLOR_LOW  = 0,
-	COLOR_HIGH = 1,
-	COLOR_TRUE = 2
-} Colors;
-
-typedef enum {
-	PACKING_SINGLE_PIXEL_PER_WRITE = 0,
-	PACKING_FULLY_32bit            = 1,
-	PACKING_FULLY_64bit            = 2
-} PixelPacking;
-
-#define VIDEO_COLOR_RGBAX       0x3
-
-void video_setup(uint64_t base, uint8_t controlBit, uint32_t width, uint32_t height, Colors colors, PixelPacking packing);
-
-void video_write_pixel(uint64_t base, uint64_t offset, uint32_t value);
-void video_write_pixel_rgb(uint64_t base, uint64_t offset, uint8_t red, uint8_t green, uint8_t blue);
-void video_write_pixel_raw(uint64_t base, uint64_t offset, uint32_t bytecode);
-void video_write_pixel_buffer_fully_packed(uint64_t base, uint64_t *buffer, uint64_t count);
-void video_write_pixel_buffer(uint64_t base, uint32_t *buffer, uint64_t count);
 
 #endif /* SRC_MUSTEIN_GPU64_H_ */
