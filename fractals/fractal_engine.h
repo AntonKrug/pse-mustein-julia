@@ -11,13 +11,13 @@
 #include <stdint.h>
 
 typedef struct {
-  float seedReal;
-  float seedComplex;
-  float lookAtX;
-  float lookAtY;
-  float width;
-  float height;
-  float gamma;
+    float seedReal;
+    float seedComplex;
+    float lookAtX;
+    float lookAtY;
+    float width;
+    float height;
+    float gamma;
 } FractalView;
 
 
