@@ -21,7 +21,8 @@ button2: Miscellaneous.Button @ gpio0
 """
 
 
-include $CWD/../../extras/workspace.examples/pse-mustein-julia/renode/models/MusteinGenericGPU.cs
+#SoftConsole 6.1 has bundled MusteinGenericGPU model, do not include it's sources again
+#include $CWD/../../extras/workspace.examples/pse-mustein-julia/renode/models/MusteinGenericGPU.cs
 
 
 machine LoadPlatformDescriptionFromString "mustein: Video.MusteinGenericGPU @ sysbus 0x10100000 { frameBufferSize: 0x100000; registers64bitAligned: true }"
