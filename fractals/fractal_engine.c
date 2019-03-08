@@ -39,7 +39,7 @@ const uint32_t colors[64] = {
 uint32_t FORCE_INLINE FORCE_O3 renderFractalPixel(
 		float    x,        float    y,
 		float    seedReal, float    seedComplex,
-		float    gamma,    uint64_t maxIter) {
+		float    gamma,    uint32_t maxIter) {
 
     const bool isJulia = true; // Can switch between Julia and Mandelbrot
 
@@ -51,7 +51,7 @@ uint32_t FORCE_INLINE FORCE_O3 renderFractalPixel(
     }
     float u2 = u * u;
     float v2 = v * v;
-    uint64_t iter;        // iterations executed
+    uint32_t iter;        // iterations executed
 
     if (isJulia) {
         for (iter = 0 ; iter < maxIter && ( u2+v2 < 4.0f); iter++) {
@@ -89,7 +89,7 @@ void renderFractal(FractalView *item, uint32_t *buffer) {
     const float stepY = item->height / HEIGHT;
 
     // Max iterations will affect the "exposure"
-    const uint64_t maxIter = (uint32_t)((float)NELEMS(colors) / item->gamma);
+    const uint32_t maxIter = (uint32_t)((float)NELEMS(colors) / item->gamma);
 
     for (uint32_t cursorY = 0; cursorY < HEIGHT; cursorY++) {
         float y = ymin + cursorY * stepY;
