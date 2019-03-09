@@ -49,12 +49,12 @@ uint32_t FORCE_INLINE FORCE_O3 renderFractalPixel(
     }
     float u2 = u * u;
     float v2 = v * v;
-    uint32_t iter;        // iterations executed
+    uint32_t iter;        // Counting how many iterations were executed
 
     if (isJulia) {
         for (iter = 0 ; iter < maxIter && ( u2+v2 < 4.0f); iter++) {
             v  = u * v;
-            v  = v + v   + seedComplex; // addition v+v instead of 2*v
+            v  = v + v   + seedComplex; // Addition v+v instead of 2*v
             u  = u2 - v2 + seedReal;
             u2 = u * u;
             v2 = v * v;
@@ -71,9 +71,11 @@ uint32_t FORCE_INLINE FORCE_O3 renderFractalPixel(
     }
 
     if (iter >= maxIter) {
+    	// Render as black color if iterated for too long
         return 0x0;
     }
     else {
+    	// Render as color from the color lookup table
         return colors[(uint8_t)(iter * gamma)];
     }
 }
@@ -86,7 +88,8 @@ void renderFractal(FractalView *item, uint32_t *buffer) {
     const float stepX = item->width  / WIDTH;
     const float stepY = item->height / HEIGHT;
 
-    // Max iterations will affect the "exposure"
+    // Max iterations will affect the "exposure", more iterations will resolve
+    // even the "black" portions of the fractal but cost more cycles to compute
     const uint32_t maxIter = (uint32_t)((float)NELEMS(colors) / item->gamma);
 
     for (uint32_t cursorY = 0; cursorY < HEIGHT; cursorY++) {
@@ -95,6 +98,7 @@ void renderFractal(FractalView *item, uint32_t *buffer) {
         for (uint32_t cursorX = 0; cursorX < WIDTH; cursorX++) {
             float x = xmin + cursorX * stepX;
 
+            // Render the fractal for each pixel in the buffer
             uint32_t result = renderFractalPixel(
                     x,              y,
                     item->seedReal, item->seedComplex,

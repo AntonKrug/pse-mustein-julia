@@ -53,7 +53,7 @@ FractalView julias[] = {
 
 
 float FORCE_INLINE rescale(float old, float new, float percentage) {
-  // make sure even with overflowed percentage it will compute correctly
+  // Make sure even with overflowed percentage it will compute correctly
   return ((new - old) * fminf(1.0f, fmaxf(0.0f, percentage))) + old;
 }
 
@@ -76,16 +76,20 @@ void fractalLoop(uint64_t base, uint32_t *buffer) {
 
     for (float percentage = 0.0f; percentage <= 1.1f; percentage += currentSpeed) {
         // 0.0f to 1.0f will be transitions
-        // >1.0f will render same frame (timing without using timer)
+        // Values over 1.0f will render same frame (timing without using timer)
 
         FractalView current;
         transition(&julias[i], &julias[iNext], percentage, &current);
         renderFractal(&current, buffer);
 
         if (current.gamma < 3.0f) {
+        	// When using low gamma it means that it increases computational
+        	// complexity, so increase the animation speed and do not spend
+        	// as many frames in the very heavy parts of the animation
             currentSpeed = ANIMATION_SPEED * 3.0f * (1.0f / current.gamma);
         }
 
+        // Display the rendered buffer
         mustein_write_buffer32(base, buffer, WIDTH * HEIGHT);
     }
     i = iNext;
