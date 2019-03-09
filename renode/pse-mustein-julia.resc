@@ -8,6 +8,12 @@ mach create
 
 machine LoadPlatformDescription @platforms/cpus/polarfire.repl
 
+
+# SoftConsole 6.1 has bundled MusteinGenericGPU model, do not include its sources again
+# SoftConsole 6.0 only Linux is supported and you have to uncomment the line below and change the path to your workspace:  
+#include $CWD/../../extras/workspace.examples/pse-mustein-julia/renode/models/MusteinGenericGPU.cs
+
+
 machine LoadPlatformDescriptionFromString 
 """
 button0: Miscellaneous.Button @ gpio0
@@ -19,10 +25,6 @@ button1: Miscellaneous.Button @ gpio0
 button2: Miscellaneous.Button @ gpio0
     -> gpio0@2
 """
-
-
-#SoftConsole 6.1 has bundled MusteinGenericGPU model, do not include it's sources again
-#include $CWD/../../extras/workspace.examples/pse-mustein-julia/renode/models/MusteinGenericGPU.cs
 
 
 machine LoadPlatformDescriptionFromString "mustein: Video.MusteinGenericGPU @ sysbus 0x10100000 { frameBufferSize: 0x100000; registers64bitAligned: true }"
