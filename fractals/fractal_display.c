@@ -5,12 +5,12 @@
 
 #include <stdio.h>
 #include <float.h>
-#include <fractal_engine.h>
 #include <math.h>
 
 #include "mustein_gpu.h"
 #include "common_macros.h"
 #include "fractal_configuration.h"
+#include "fractal_engine.h"
 
 #define RESCALE_FIELD(SET, INDEX, INDEX_NEXT, PERCENTAGE, FIELD) (rescale((SET)[(INDEX)].FIELD, (SET)[(INDEX_NEXT)].FIELD, (PERCENTAGE)))
 

@@ -4,12 +4,10 @@
  */
 
 #include <fractal_engine.h>
+
 #include "fractal_configuration.h"
 #include "common_macros.h"
 #include "mustein_gpu.h"
-
-
-FractalView mandelMap = { 0.0f, 0.0f, -0.7f, 0.0f, 2.8f, 2.8f, 1.0f };
 
 // http://www.malinc.se/m/JuliaSets.php
 // http://usefuljs.net/fractals/docs/julia_mandelbrot.html
