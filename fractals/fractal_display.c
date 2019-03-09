@@ -20,7 +20,6 @@
 //
 // Some locations taken from:
 //   http://www.karlsims.com/julia.html
-//   http://usefuljs.net/fractals/docs/julia_mandelbrot.html
 
 
 FractalView julias[] = {
