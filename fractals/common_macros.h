@@ -1,6 +1,6 @@
 /*
- *		Date: 2018/12/01
- *      Author: akrug
+ *		Date:   2018/12/01
+ *      Author: anton.krug@microchip.com
  */
 
 #ifndef SRC_COMMON_MACROS_H_
