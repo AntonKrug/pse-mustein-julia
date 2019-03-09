@@ -1,6 +1,6 @@
-/*
- *		Date:   2018/12/01
- *      Author: anton.krug@microchip.com
+/*******************************************************************************
+ * (c) Copyright 2018 Microsemi SoC Products Group. All rights reserved.
+ * v1.0 2018/12/01 anton.krug@microchip.com
  */
 
 #include <fractal_engine.h>
