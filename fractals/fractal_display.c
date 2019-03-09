@@ -18,7 +18,7 @@
 // Coordinate system is similar to Christian Stigen Larsen's approach:
 //   http://tilde.club/~david/m/
 //
-// Some locations taken from:
+// Some Julia locations are taken from Karl Sims's website:
 //   http://www.karlsims.com/julia.html
 
 
