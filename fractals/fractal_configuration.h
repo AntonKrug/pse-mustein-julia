@@ -19,7 +19,7 @@
 #define HEIGHT_BITS 7  // HEIGHT = 1 << HEIGHT_BITS
 
 #ifndef ANIMATION_SPEED
-#define ANIMATION_SPEED 0.05f // How large steps are done between the frames
+#define ANIMATION_SPEED 0.02f // How large steps are done between the frames
 #endif
 
 
