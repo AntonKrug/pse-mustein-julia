@@ -5,7 +5,6 @@
  ******************************************************************************/
 
 #include <common_macros.h>
-#include <mustein_gpu64.h>
 #include "mss_util.h"
 #include "mss_clint.h"
 #include "mss_hart_ints.h"
