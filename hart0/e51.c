@@ -4,7 +4,6 @@
  * Code running on E51 hart 0
  ******************************************************************************/
 
-#include <common_macros.h>
 #include "mss_util.h"
 #include "mss_clint.h"
 #include "mss_hart_ints.h"
