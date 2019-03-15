@@ -31,8 +31,8 @@ namespace Antmicro.Renode.Peripherals.Video {
             this.controlBit      = controlBit; // All acceses with this bit set are handled by the control registers
             this.controlOffset   = 1L << (int)controlBit; // All acceses smaller than this value are going to the buffer
             this.is64bitAligned  = registers64bitAligned; // Are control register aligned to 32bit or 64bit
-            accessAligment       = (registers64bitAligned) ? 8 : 4; // To what bytes the control registers are aligned
-            sync                 = new object();
+            this.accessAligment  = (registers64bitAligned) ? 8 : 4; // To what bytes the control registers are aligned
+            this.sync            = new object();
 
             // Allows to switch ordering for the 8bit mode lookup table depending what is closer to the native host colorspace
 #if PLATFORM_WINDOWS
@@ -150,6 +150,10 @@ namespace Antmicro.Renode.Peripherals.Video {
 
             this.Log(LogLevel.Noisy, "The display is reconfigured to {0}x{1} with {2} color format (setColor ={3})",
                      Width, Height, Format.ToString(), setColor);
+
+            if (Width * Height * accessAligment > frameBufferSize) {
+                this.log(LogLevel.Warning, "This resolution with some (or all) pixel packing modes may not fit in the frameBuffer, if needed increase the frameBufferSize.");
+            }
         }
 
         public void ChangePacking(PixelPacking packing) {
