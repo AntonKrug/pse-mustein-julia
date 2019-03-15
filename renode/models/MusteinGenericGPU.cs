@@ -151,8 +151,8 @@ namespace Antmicro.Renode.Peripherals.Video {
             this.Log(LogLevel.Noisy, "The display is reconfigured to {0}x{1} with {2} color format (setColor ={3})",
                      Width, Height, Format.ToString(), setColor);
 
-            if (Width * Height * accessAligment > frameBufferSize) {
-                this.log(LogLevel.Warning, "This resolution with some (or all) pixel packing modes may not fit in the frameBuffer, if needed increase the frameBufferSize.");
+            if ((setWidth != null || setHeight != null) &&Width * Height * accessAligment > frameBufferSize) {
+                this.Log(LogLevel.Warning, "This resolution with some (or all) pixel packing modes will not fit in the frameBuffer, if needed increase the frameBufferSize.");
             }
         }
 
